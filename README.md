@@ -1,7 +1,3 @@
-Here's a more detailed and structured `README.md` for your Auto Download Organizer project:
-
----
-
 # Auto Download Organizer
 
 Auto Download Organizer is a Python utility that automatically categorizes and organizes files from your `Downloads` folder into appropriate sub-folders based on their file types. It features duplicate file handling, dynamic folder creation, and a countdown timer to allow immediate access to downloaded files before organization.
@@ -127,7 +123,3 @@ The current file categories and supported file types are defined in the `move_fi
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-This README should give users a comprehensive understanding of how to set up, use, and customize the Auto Download Organizer. Let me know if you'd like to make further adjustments!
