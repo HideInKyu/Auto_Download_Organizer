@@ -6,8 +6,11 @@ from file_getter import monitor_downloads, CountdownTimer, scan_existing_files
 def on_timer_complete():
     global files
     print("Timer completed. Moving files...")
-    move_files(files)
-    files.clear()
+    if files:  # Check if there are files to move
+        move_files(files)
+        files.clear()
+    else:
+        print("No files to move.")
 
 def initial_scan_and_process(download_path):
     global files
@@ -25,8 +28,7 @@ def initial_scan_and_process(download_path):
             time.sleep(1)
         
         # Move the initial files after countdown
-        move_files(files)
-        files.clear()
+        on_timer_complete()
     else:
         print("No initial files or folders detected.")
 
@@ -41,7 +43,7 @@ def main():
     initial_scan_and_process(download_path)
 
     # Initialize the countdown timer for future downloads
-    countdown_timer = CountdownTimer(countdown_time=10, on_complete=on_timer_complete)
+    countdown_timer = CountdownTimer(countdown_time=600, on_complete=on_timer_complete)
 
     # Monitor new downloads and handle them with the countdown timer
     monitor_downloads(download_path, files, countdown_timer)

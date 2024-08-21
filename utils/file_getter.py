@@ -40,7 +40,7 @@ class DownloadEventHandler(FileSystemEventHandler):
             else:
                 file_type = os.path.splitext(event.src_path)[1][1:]
                 self.files[event.src_path] = file_type
-                print(f"File detected: {event.src_path} ({file_type})")
+                print(f"File detected (created): {event.src_path} ({file_type})")
                 self.countdown_timer.reset_timer()
 
     def on_modified(self, event):
@@ -73,13 +73,19 @@ def scan_existing_files(download_path):
     files = {}
     existing_items = os.listdir(download_path)
 
+    print(f"Scanning existing files in {download_path}...")  # Debug log
+
     for item in existing_items:
         full_path = os.path.join(download_path, item)
+        print(f"Checking item: {full_path}")  # Debug log
         if os.path.isfile(full_path) and not item.startswith('.'):
             file_type = os.path.splitext(full_path)[1][1:]  # Get file extension without dot
             files[full_path] = file_type
+            print(f"File found: {full_path} ({file_type})")  # Debug log
         elif os.path.isdir(full_path) and not item.startswith('.'):
             # Detect directories that may need to be moved to "Files"
             files[full_path] = 'directory'
+            print(f"Directory found: {full_path}")  # Debug log
     
+    print(f"Finished scanning. Files detected: {files}")  # Final debug log
     return files
